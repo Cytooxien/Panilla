@@ -7,20 +7,26 @@ subprojects {
     apply plugin: 'java'
 
     repositories {
-        mavenLocal()
         mavenCentral()
+        mavenLocal()
         maven {
             url 'https://repo.codemc.io/repository/maven-public/'
         }
         maven {
-            name = "cytooxien"
-            url = uri("https://git.cytooxien.de/api/v4/projects/157/packages/maven")
-            credentials(PasswordCredentials::class)
+            url = uri("https://repo.papermc.io/repository/maven-public/")
+        }
+        maven {
+            name 'cytooxien'
+            url 'https://git.cytooxien.de/api/v4/projects/157/packages/maven'
+            credentials {
+                username = project.findProperty('cytooxienUsername')
+                password = project.findProperty('cytooxienPassword')
+            }
         }
     }
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 21
+    targetCompatibility = 21
 }
 
 tasks.register('clean') {

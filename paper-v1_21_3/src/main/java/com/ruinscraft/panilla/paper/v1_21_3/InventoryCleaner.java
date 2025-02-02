@@ -1,4 +1,4 @@
-package com.ruinscraft.panilla.paper.v1_21;
+package com.ruinscraft.panilla.paper.v1_21_3;
 
 import com.ruinscraft.panilla.api.IInventoryCleaner;
 import com.ruinscraft.panilla.api.IPanilla;
@@ -7,7 +7,7 @@ import com.ruinscraft.panilla.api.exception.FailedNbt;
 import com.ruinscraft.panilla.api.exception.FailedNbtList;
 import com.ruinscraft.panilla.api.nbt.INbtTagCompound;
 import com.ruinscraft.panilla.api.nbt.checks.NbtChecks;
-import com.ruinscraft.panilla.paper.v1_21.nbt.NbtTagCompound;
+import com.ruinscraft.panilla.paper.v1_21_3.nbt.NbtTagCompound;
 import de.tr7zw.changeme.nbtapi.NBT;
 import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.world.entity.player.Inventory;

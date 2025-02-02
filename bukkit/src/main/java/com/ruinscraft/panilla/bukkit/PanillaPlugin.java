@@ -25,7 +25,7 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
     private PTranslations pTranslations;
     private IPanillaLogger panillaLogger;
     private IProtocolConstants protocolConstants;
-    private IPlayerInjector playerInjector = new com.ruinscraft.panilla.paper.v1_21.io.PlayerInjector();
+    private IPlayerInjector playerInjector = new com.ruinscraft.panilla.paper.v1_21_3.io.PlayerInjector();
     private IPacketInspector packetInspector;
     private IInventoryCleaner containerCleaner;
     private IEnchantments enchantments;
@@ -155,247 +155,21 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
 
         // Paper 1.21.3
         if (Bukkit.getUnsafe().getDataVersion() == 4082) {
-            packetSerializerClass = com.ruinscraft.panilla.paper.v1_12_3.io.dplx.PacketSerializer.class;
+            packetSerializerClass = com.ruinscraft.panilla.paper.v1_21_3.io.dplx.PacketSerializer.class;
             protocolConstants = new IProtocolConstants() {
                 @Override
                 public int maxBookPages() {
                     return 100;
                 }
             };
-            playerInjector = new com.ruinscraft.panilla.paper.v1_12_3.io.PlayerInjector();
-            packetInspector = new com.ruinscraft.panilla.paper.v1_12_3.io.PacketInspector(this);
-            containerCleaner = new com.ruinscraft.panilla.paper.v1_12_3.InventoryCleaner(this);
+            playerInjector = new com.ruinscraft.panilla.paper.v1_21_3.io.PlayerInjector();
+            packetInspector = new com.ruinscraft.panilla.paper.v1_21_3.io.PacketInspector(this);
+            containerCleaner = new com.ruinscraft.panilla.paper.v1_21_3.InventoryCleaner(this);
             return;
         }
 
-        // Paper 1.21, 1.21.1
-        if (Bukkit.getUnsafe().getDataVersion() == 3953 || Bukkit.getUnsafe().getDataVersion() == 3955) {
-            packetSerializerClass = com.ruinscraft.panilla.paper.v1_21.io.dplx.PacketSerializer.class;
-            protocolConstants = new IProtocolConstants() {
-                @Override
-                public int maxBookPages() {
-                    return 100;
-                }
-            };
-            playerInjector = new com.ruinscraft.panilla.paper.v1_21.io.PlayerInjector();
-            packetInspector = new com.ruinscraft.panilla.paper.v1_21.io.PacketInspector(this);
-            containerCleaner = new com.ruinscraft.panilla.paper.v1_21.InventoryCleaner(this);
-            return;
-        }
-
-        // Paper 1.20.6
-        if (Bukkit.getUnsafe().getDataVersion() == 3839) {
-            packetSerializerClass = com.ruinscraft.panilla.paper.v1_20_6.io.dplx.PacketSerializer.class;
-            protocolConstants = new IProtocolConstants() {
-                @Override
-                public int maxBookPages() {
-                    return 100;
-                }
-            };
-            playerInjector = new com.ruinscraft.panilla.paper.v1_20_6.io.PlayerInjector();
-            packetInspector = new com.ruinscraft.panilla.paper.v1_20_6.io.PacketInspector(this);
-            containerCleaner = new com.ruinscraft.panilla.paper.v1_20_6.InventoryCleaner(this);
-            return;
-        }
-        imp:
-        switch (SERVER_IMP) {
-            case "CraftServer":
-                final String craftVersion = getServer().getClass().getPackage().getName().substring("org.bukkit.craftbukkit.".length());
-                switch (craftVersion) {
-                    case "v1_8_R3":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_8_R3.io.dplx.PacketSerializer.class;
-                        protocolConstants = new DefaultProtocolConstants();
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_8_R3.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_8_R3.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_8_R3.InventoryCleaner(this);
-                        break imp;
-                    case "v1_12_R1":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_12_R1.io.dplx.PacketSerializer.class;
-                        protocolConstants = new DefaultProtocolConstants();
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_12_R1.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_12_R1.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_12_R1.InventoryCleaner(this);
-                        break imp;
-                    case "v1_13_R2":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_13_R2.io.dplx.PacketSerializer.class;
-                        protocolConstants = new DefaultProtocolConstants();
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_13_R2.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_13_R2.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_13_R2.InventoryCleaner(this);
-                        break imp;
-                    case "v1_14_R1":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_14_R1.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_14_R1.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_14_R1.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_14_R1.InventoryCleaner(this);
-                        break imp;
-                    case "v1_15_R1":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_15_R1.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_15_R1.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_15_R1.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_15_R1.InventoryCleaner(this);
-                        break imp;
-                    case "v1_16_R1":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_16_R1.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_16_R1.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_16_R1.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_16_R1.InventoryCleaner(this);
-                        break imp;
-                    case "v1_16_R2":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_16_R2.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_16_R2.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_16_R2.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_16_R2.InventoryCleaner(this);
-                        break imp;
-                    case "v1_16_R3":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_16_R3.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_16_R3.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_16_R3.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_16_R3.InventoryCleaner(this);
-                        break imp;
-                    case "v1_17_R1":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_17_R1.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_17_R1.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_17_R1.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_17_R1.InventoryCleaner(this);
-                        break imp;
-                    case "v1_18_R1":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_18_R1.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_18_R1.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_18_R1.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_18_R1.InventoryCleaner(this);
-                        break imp;
-                    case "v1_18_R2":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_18_R2.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_18_R2.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_18_R2.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_18_R2.InventoryCleaner(this);
-                        break imp;
-                    case "v1_19_R1":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_19_R1.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_19_R1.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_19_R1.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_19_R1.InventoryCleaner(this);
-                        break imp;
-                    case "v1_19_R2":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_19_R2.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_19_R2.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_19_R2.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_19_R2.InventoryCleaner(this);
-                        break imp;
-                    case "v1_19_R3":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_19_R3.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_19_R3.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_19_R3.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_19_R3.InventoryCleaner(this);
-                        break imp;
-                    case "v1_20_R1":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_20_R1.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_20_R1.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_20_R1.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_20_R1.InventoryCleaner(this);
-                        break imp;
-                    case "v1_20_R2":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_20_R2.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_20_R2.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_20_R2.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_20_R2.InventoryCleaner(this);
-                        break imp;
-                    case "v1_20_R3":
-                        packetSerializerClass = com.ruinscraft.panilla.craftbukkit.v1_20_R3.io.dplx.PacketSerializer.class;
-                        protocolConstants = new IProtocolConstants() {
-                            @Override
-                            public int maxBookPages() {
-                                return 100;
-                            }
-                        };
-                        playerInjector = new com.ruinscraft.panilla.craftbukkit.v1_20_R3.io.PlayerInjector();
-                        packetInspector = new com.ruinscraft.panilla.craftbukkit.v1_20_R3.io.PacketInspector(this);
-                        containerCleaner = new com.ruinscraft.panilla.craftbukkit.v1_20_R3.InventoryCleaner(this);
-                        break imp;
-                }
-            default:
-                getLogger().warning("Unknown server implementation. " + Bukkit.getVersion() + " may not be supported by Panilla.");
-                return;
-        }
+        getLogger().severe("Unknown server implementation. " + Bukkit.getVersion() + " is not supported by Panilla.");
+        getServer().getPluginManager().disablePlugin(this);
     }
 
     @Override
