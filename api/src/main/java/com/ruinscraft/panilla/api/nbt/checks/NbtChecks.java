@@ -52,7 +52,6 @@ public final class NbtChecks {
         register(new NbtCheck_Potion());
         register(new NbtCheck_CustomPotionColor());
         register(new NbtCheck_display());
-        register(new NbtCheck_HideFlags());
         register(new NbtCheck_resolved());
         register(new NbtCheck_generation());
         register(new NbtCheck_author());
@@ -142,6 +141,7 @@ public final class NbtChecks {
     public static FailedNbtList checkAll(INbtTagCompound tag, String nmsItemClassName, IPanilla panilla) {
         FailedNbtList failedNbtList = new FailedNbtList();
         if (!tagMeetsKeyThreshold(tag, panilla)) {
+            System.out.println("Failed key threshold");
             failedNbtList.add(FailedNbt.FAIL_KEY_THRESHOLD);
         }
 
@@ -154,6 +154,7 @@ public final class NbtChecks {
                 INbtTagList list = tag.getList(key);
 
                 if (list.size() > 128) {
+                    System.out.println("Failed list size");
                     failedNbtList.add(new FailedNbt((key), NbtCheck.NbtCheckResult.CRITICAL));
                 }
             }
@@ -172,6 +173,7 @@ public final class NbtChecks {
             NbtCheck.NbtCheckResult result = check.check(tag, nmsItemClassName, panilla);
 
             if (result != NbtCheck.NbtCheckResult.PASS) {
+                System.out.println("Failed check: " + key + " => " + result);
                 failedNbtList.add(new FailedNbt(key, result));
             }
         }

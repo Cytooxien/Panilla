@@ -26,6 +26,7 @@ public class PacketInspectorDplx extends ChannelDuplexHandler {
         try {
             panilla.getPacketInspector().checkPlayIn(panilla, player, msg);
         } catch (PacketException e) {
+            e.printStackTrace();
             if (handlePacketException(player, e)) {
                 return;
             }
@@ -40,6 +41,7 @@ public class PacketInspectorDplx extends ChannelDuplexHandler {
         try {
             panilla.getPacketInspector().checkPlayOut(panilla, msg);
         } catch (PacketException e) {
+            e.printStackTrace();
             if (handlePacketException(player, e)) {
                 return;
             }
