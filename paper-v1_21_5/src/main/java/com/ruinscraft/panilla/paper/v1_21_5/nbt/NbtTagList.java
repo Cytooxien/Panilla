@@ -20,7 +20,7 @@ public class NbtTagList implements INbtTagList {
 
     @Override
     public String getString(int index) {
-        return (String) handle.get(index);
+        return handle.get(index).toString();
     }
 
     @Override
