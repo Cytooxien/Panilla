@@ -1,0 +1,13 @@
+dependencies {
+    compileOnly project(':panilla-api')
+    compileOnly 'io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT'
+    compileOnly 'io.papermc.paper:paper-server:1.21.8-R0.1-SNAPSHOT'
+    compileOnly 'io.netty:netty-all:4.1.117.Final'
+    implementation 'de.tr7zw:item-nbt-api:2.14.0'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}

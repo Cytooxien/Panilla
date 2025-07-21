@@ -5,6 +5,7 @@ include(':panilla-api')
 
 // bukkit
 include(':panilla-paper-v1_21_3')
+include(':panilla-paper-v1_21_5')
 include(':panilla-bukkit')
 
 // api
@@ -12,4 +13,5 @@ project(':panilla-api').projectDir = file('api')
 
 // bukkit
 project(':panilla-paper-v1_21_3').projectDir = file('paper-v1_21_3')
+project(':panilla-paper-v1_21_5').projectDir = file('paper-v1_21_5')
 project(':panilla-bukkit').projectDir = file('bukkit')
