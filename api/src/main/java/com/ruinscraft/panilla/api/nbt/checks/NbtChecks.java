@@ -140,7 +140,7 @@ public final class NbtChecks {
     public static FailedNbtList checkAll(INbtTagCompound tag, String nmsItemClassName, IPanilla panilla) {
         FailedNbtList failedNbtList = new FailedNbtList();
         if (!tagMeetsKeyThreshold(tag, panilla)) {
-            System.out.println("Failed key threshold");
+            panilla.getPanillaLogger().info("Failed key threshold", false);
             failedNbtList.add(FailedNbt.FAIL_KEY_THRESHOLD);
         }
 
@@ -153,7 +153,7 @@ public final class NbtChecks {
                 INbtTagList list = tag.getList(key);
 
                 if (list.size() > 128) {
-                    System.out.println("Failed list size");
+                    panilla.getPanillaLogger().info("Failed list size", false);
                     failedNbtList.add(new FailedNbt((key), NbtCheck.NbtCheckResult.CRITICAL));
                 }
             }
@@ -172,7 +172,7 @@ public final class NbtChecks {
             NbtCheck.NbtCheckResult result = check.check(tag, nmsItemClassName, panilla);
 
             if (result != NbtCheck.NbtCheckResult.PASS) {
-                System.out.println("Failed check: " + key + " => " + result);
+                panilla.getPanillaLogger().info("Failed check: " + key + " => " + result, false);
                 failedNbtList.add(new FailedNbt(key, result));
             }
         }
