@@ -43,6 +43,9 @@ public class InventoryCleaner implements IInventoryCleaner {
 
             for (FailedNbt failedNbt : failedNbtList) {
                 if (FailedNbt.failsThreshold(failedNbt)) {
+                    if (itemStack.getComponents().isEmpty()) {
+                        continue;
+                    }
                     Iterator<TypedDataComponent<?>> iter = itemStack.getComponents().iterator();
                     while (iter.hasNext()) iter.remove();
 
